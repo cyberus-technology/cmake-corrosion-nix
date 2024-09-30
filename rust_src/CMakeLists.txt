@@ -1,11 +1,19 @@
 include(FetchContent)
 
-message("Fetching corrosion source from git")
-FetchContent_Declare(
-        Corrosion
-        GIT_REPOSITORY https://github.com/corrosion-rs/corrosion.git
-        GIT_TAG stable/v0.4  # Newer versions require cmake 3.22 which is not available on Debian 11
-)
+if (DEFINED ENV{CORROSION_SRC})
+    message("Fetching corrosion source from env var: $ENV{CORROSION_SRC}")
+    FetchContent_Declare(
+            Corrosion
+            SOURCE_DIR "$ENV{CORROSION_SRC}"
+    )
+else ()
+    message("Fetching corrosion source from git")
+    FetchContent_Declare(
+            Corrosion
+            GIT_REPOSITORY https://github.com/corrosion-rs/corrosion.git
+            GIT_TAG stable/v0.4  # Newer versions require cmake 3.22 which is not available on Debian 11
+    )
+endif ()
 
 FetchContent_MakeAvailable(Corrosion)
 

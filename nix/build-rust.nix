@@ -1,7 +1,4 @@
-{
-  craneLib,
-  nix-gitignore,
-}:
+{ craneLib, nix-gitignore }:
 
 let
   commonArgs = {
@@ -12,8 +9,10 @@ let
   cargoArtifacts = craneLib.buildDepsOnly commonArgs;
 
   cargoPackage = craneLib.buildPackage (commonArgs // { inherit cargoArtifacts; });
+
+  cargoVendored = craneLib.vendorCargoDeps commonArgs;
 in
 {
-  inherit cargoArtifacts;
   inherit cargoPackage;
+  inherit cargoVendored;
 }

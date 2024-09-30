@@ -11,4 +11,9 @@ publish = false
 crate-type = ["lib", "staticlib"]
 
 [dependencies]
-cxx = "1.0"
+cxx = "=1.0.128"# must match 'cxxbridge-cmd'
+
+[build-dependencies]
+# List all dependencies required by corrosion. This way, they end up in
+# Cargo.lock and will be vendored by Nix.
+cxxbridge-cmd = "=1.0.128" # must match 'cxx'
