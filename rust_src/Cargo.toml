@@ -1,0 +1,14 @@
+[package]
+name = "sample_rust_cxx_bindings_lib"
+description = """
+Minimal Rust crate building a static library exporting a Cxx interface.
+"""
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["lib", "staticlib"]
+
+[dependencies]
+cxx = "1.0"
