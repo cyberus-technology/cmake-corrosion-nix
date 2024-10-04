@@ -96,6 +96,8 @@ without network access.
 - Crates `cxxbridge-cmd` and `cxx` must appear in the exact same version in
   `Cargo.lock`
   - Corrosion expects `cxxbridge-cmd@${VERSION_OF_CXX}`
+- Corrosion source must be passed in as pre-downloaded source (see
+  `FetchContent_Declare` invocations)
 
 ### Insights about the Nix Build
 
