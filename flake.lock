@@ -1,5 +1,22 @@
 {
   "nodes": {
+    "corrosion": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1715423045,
+        "narHash": "sha256-d8CspHp1N1yj7+nOkwH+EPqZgZgWLyzFdgV0/LqSbqs=",
+        "owner": "corrosion-rs",
+        "repo": "corrosion",
+        "rev": "9943de73df25ddb06bf6105baeca002ae54e45f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "corrosion-rs",
+        "ref": "v0.4.10",
+        "repo": "corrosion",
+        "type": "github"
+      }
+    },
     "crane": {
       "locked": {
         "lastModified": 1727316705,
@@ -54,6 +71,7 @@
     },
     "root": {
       "inputs": {
+        "corrosion": "corrosion",
         "crane": "crane",
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs"
