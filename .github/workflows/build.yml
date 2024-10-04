@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Install prerequisites
+        run: apt update && apt install -y libfmt-dev
       - name: Build CMake Project
         uses: threeal/cmake-action@v2.0.0
 
