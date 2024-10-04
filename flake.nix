@@ -36,7 +36,10 @@
           formatter = pkgs.nixfmt-rfc-style;
           packages =
             let
-              rustLib = pkgs.callPackage ./nix/build-rust.nix { craneLib = inputs.crane.mkLib pkgs; };
+              rustLib = import ./nix/build-rust.nix {
+                inherit (pkgs) nix-gitignore;
+                craneLib = inputs.crane.mkLib pkgs;
+              };
               cxxbridge-cmd = pkgs.callPackage ./nix/build-cxxbridge-cmd.nix { inherit rustLib; };
               cmakeProj = pkgs.callPackage ./nix/build-cmake-proj.nix {
                 corrosionSrc = inputs.corrosion;

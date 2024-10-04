@@ -30,18 +30,24 @@ runCommand "cxxbridge-cmd-${cxxVersion}"
     ];
   }
   ''
+    # Directory with vendored sources.
     DIR=$(cat ${rustLib.cargoVendored}/config.toml | grep -o '/nix/store/[^"]*' | cut -d'/' -f1-5)
 
-    # Append the information to use the vendored sources and registry
+    # Write the Cargo config to the proper location.
     mkdir -p .cargo
     cat ${rustLib.cargoVendored}/config.toml > .cargo/config.toml
 
-    # Make sure our config.toml will be used
+    # Make sure our config.toml will be used by `cargo install`.
     export CARGO_HOME="$PWD/.cargo"
 
     export CARGO_TARGET_DIR="$PWD/target"
 
     mkdir -p $out/bin
-    # export CARGO_LOG=debug
-    cargo install --verbose --offline --root $out --path "$DIR/cxxbridge-cmd-${toString cxxVersion}"
+
+    # Run `cargo install` on local source.
+    cargo install \
+      --verbose \
+      --offline \
+      --root $out \
+      --path "$DIR/cxxbridge-cmd-${toString cxxVersion}"
   ''
