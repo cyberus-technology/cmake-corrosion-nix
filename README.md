@@ -84,6 +84,9 @@ derivation) should not be blocked or hindered in any way.
 
 ### Modifications to Build System
 
+**TL;DR:** We modify the environment Cargo will see in a way that it just works
+without network access.
+
 - All `Cargo.lock` files must be checked in
   - Although it is not typical to check in `Cargo.lock` files for Rust
     libraries, this is crucial for build reproducibility.
