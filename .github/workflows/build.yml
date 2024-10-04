@@ -10,11 +10,13 @@ env:
 
 jobs:
   build_regular:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
-      - name: Install prerequisites
-        run: apt update && apt install -y libfmt-dev
+      - name: Prepare environment
+        run: |
+          sudo apt-get update && sudo apt-get install -y g++-13
+          echo "CXX=g++-13" >> $GITHUB_ENV
       - name: Build CMake Project
         uses: threeal/cmake-action@v2.0.0
 
