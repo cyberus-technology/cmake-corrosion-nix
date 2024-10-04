@@ -1,0 +1,37 @@
+name: Build
+
+on:
+  merge_group:
+  pull_request:
+  push:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build_regular:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build CMake Project
+        uses: threeal/cmake-action@v2.0.0
+
+  build_nix_shell:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@V27
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: Build CMake Project
+        run: nix develop --command bash -c "mkdir build && cd build && cmake .. -G Ninja && ninja"
+
+  build_nix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@V27
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+      - name: nix build
+        run: |
+          export EXPECTED="Hello World! first=0, second=1"
+          nix run . | grep -q -F "$EXPECTED"
