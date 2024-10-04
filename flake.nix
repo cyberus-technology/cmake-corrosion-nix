@@ -25,12 +25,10 @@
         {
           devShells = {
             default = pkgs.mkShell {
-              # TODO inputsFrom = [ self'.packages.default ];
+              inputsFrom = [ self'.packages.default ];
               packages = with pkgs; [
-                cargo
-                cmake
+                git
                 ninja
-                rustc
                 nixfmt-rfc-style
               ];
             };

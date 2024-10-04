@@ -27,7 +27,7 @@ jobs:
       - uses: cachix/install-nix-action@v30
       - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Build CMake Project
-        run: nix develop --command bash -c "mkdir build && cd build && cmake .. -G Ninja && ninja"
+        run: nix develop -i --command bash -c "mkdir build && cd build && cmake .. -G Ninja && ninja"
 
   build_nix:
     runs-on: ubuntu-latest
