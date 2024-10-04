@@ -39,9 +39,9 @@ CMake-based setup. CMake uses [Corrosion](https://github.com/corrosion-rs/corros
 to import the crate and make its targets available in the CMake world.
 
 Goal of this project is to explore and demonstrate how the minimal setup looks
-like and how the build system needs to be modified and look like in the end, so
-that the whole project can be built in a
-in the most natural way known from other Nix derivations.
+and how the build system needs to be modified and look like in the end, so that
+the whole project can be built in the natural way known from other Nix
+derivations.
 
 This means:
 - decouple downloading of any resources from the build step
