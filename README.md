@@ -82,6 +82,20 @@ derivation) should not be blocked or hindered in any way.
 
 ## Solution
 
+The solution presented here requires minor modifications to the build system,
+but can work with an unmodified version of Corrosion. The environment that
+Cargo sees in the derivation of the CMake build is enriched with pre-fetched
+dependencies from dedicated Nix derivations. Therefore, when Cargo is invoked by
+CMake, Cargo doesn't need any network access.
+
+### Why no Fixed-output Derivation?
+
+As the artifact contains Nix store paths, such as being linked against certain
+libraries, fixed output derivations won't work with
+["Illegal path reference"](https://github.com/NixOS/nix/blob/7c506432abab84d79744f4454aa20fe0a458e0fb/src/libstore/build/local-derivation-goal.cc#L2573)
+errors. Therefore, Fixed-output derivations are usually suited for downloading
+artifacts but not for building artifacts.
+
 ### Modifications to Build System
 
 **TL;DR:** We modify the environment Cargo will see in a way that it just works
@@ -114,12 +128,14 @@ without network access.
 
 This project is focused on the following build tools and helpers:
 
-- CMake in version `3.29.2`
-- Corrosion in version `0.4.10`
-- Crane in version `0.19.0`
+- Tools as specified by the used Nix shell. Specifically, this means:
+  - CMake in version `3.29.2`
+  - Rust/Cargo in version `1.81.0`
 - Nix in version `2.18.8`
-- Rust/Cargo in version `1.81.0`
-- Dependencies as referenced in `rust_src/Cargo.lock`
+- Crane in version `0.19.0`
+- Corrosion in version `0.4.10`
+- Cargo Dependencies as referenced in `rust_src/Cargo.lock`
+- Other flake dependencies as referenced in `flake.lock`
 
 Other versions might work as well and the required steps are similar or even
 equal.
