@@ -18,7 +18,7 @@ jobs:
           sudo apt-get update && sudo apt-get install -y g++-13
           echo "CXX=g++-13" >> $GITHUB_ENV
       - name: Build CMake Project
-        uses: threeal/cmake-action@v2.0.0
+        uses: threeal/cmake-action@v2.1.0
 
   build_nix_shell:
     runs-on: ubuntu-latest
