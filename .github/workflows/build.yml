@@ -27,6 +27,8 @@ jobs:
           echo $Rust_COMPILER
       - name: Build CMake Project
         uses: threeal/cmake-action@v2.1.0
+        with:
+          options: Rust_COMPILER=/home/runner/.cargo/bin/rustc
 
   build_nix_shell:
     runs-on: ubuntu-latest
