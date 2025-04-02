@@ -24,6 +24,7 @@ jobs:
         run: |
           rustc --version
           which rustc
+          echo $Rust_COMPILER
       - name: Build CMake Project
         uses: threeal/cmake-action@v2.1.0
 
