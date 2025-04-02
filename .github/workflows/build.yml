@@ -17,6 +17,7 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y g++-13
           echo "CXX=g++-13" >> $GITHUB_ENV
+          echo "Rust_COMPILER=/home/runner/.cargo/bin/rustc" >> $GITHUB_ENV
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
       - name: Test Rust
