@@ -13,12 +13,20 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
+      - name: Install prerequisites
+        run: sudo apt-get update && sudo apt-get install -y g++-13
       - name: Prepare environment
         run: |
-          sudo apt-get update && sudo apt-get install -y g++-13
           echo "CXX=g++-13" >> $GITHUB_ENV
+          echo "CMake: $(cmake --version | head -n 1)"
+          echo "CXX  : $CXX"
+          echo "rustc: $(rustc --version)"
       - name: Build CMake Project
         uses: threeal/cmake-action@v2.1.0
+        with:
+          # https://github.com/corrosion-rs/corrosion/blob/master/cmake/FindRust.cmake
+          options: |
+            Rust_RESOLVE_RUSTUP_TOOLCHAINS=OFF
 
   build_nix_shell:
     runs-on: ubuntu-latest
