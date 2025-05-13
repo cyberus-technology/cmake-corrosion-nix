@@ -33,7 +33,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
-      - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: Build CMake Project
         run: nix develop -i --command bash -c "mkdir build && cd build && cmake .. -G Ninja && ninja"
 
@@ -42,7 +41,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cachix/install-nix-action@v31
-      - uses: DeterminateSystems/magic-nix-cache-action@main
       - name: nix build
         run: |
           export EXPECTED="Hello World! first=0, second=1"
